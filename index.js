@@ -10,10 +10,7 @@ dotenv.config();
 const app = express();
 
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://server-backend.azurewebsites.net"
-];
+const allowedOrigins = ["http://localhost:5174", "https://api-karel.azurewebsites.net/"];
 
 app.use(cors({
   origin: function (origin, callback) {
