@@ -12,8 +12,8 @@ const app = express();
 
 // Allow CORS with proper configuration
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://server-backend.azurewebsites.net",
+  "http://localhost:5174",
+  "https://api-mirana.azurewebsites.net",
 ];
 
 app.use(
