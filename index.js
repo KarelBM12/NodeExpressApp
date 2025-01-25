@@ -18,21 +18,26 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (allowedOrigins.includes(origin) || !origin) {
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error(`Not allowed by CORS: ${origin}`));
       }
     },
-    methods: ["GET", "POST", "PUT"],
+    methods: ["GET", "POST", "PUT", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    credentials: true, // Allow cookies and credentials
   })
 );
 
+// Handle preflight requests
+app.options("*", cors());
+
+// Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
+// MongoDB connection
 const mongoUri = process.env.MONGODB_AC;
 if (!mongoUri) {
   console.error("MONGODB_AC is not defined in the environment variables");
@@ -52,6 +57,7 @@ mongoose
     process.exit(1);
   });
 
+// API routes
 app.get("/api/formdata", async (req, res) => {
   try {
     const formData = await JobData.find();
@@ -64,7 +70,7 @@ app.get("/api/formdata", async (req, res) => {
 app.post("/api/formdata", async (req, res) => {
   const formData = new JobData(req.body);
   try {
-    const newFormData = await formData.save(); // Fixed save method
+    const newFormData = await formData.save();
     res.status(201).json(newFormData);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -84,10 +90,11 @@ app.put("/api/formdata/:id", async (req, res) => {
   }
 });
 
+// Start the server
 const port = process.env.PORT || 8482;
 
 const server = http.createServer(app);
 
 server.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`); // Fixed syntax error
+  console.log(`Server running on http://localhost:${port}`);
 });
