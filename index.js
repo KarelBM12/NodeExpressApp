@@ -11,7 +11,6 @@ dotenv.config();
 const app = express();
 
 // Allow CORS with proper configuration
-<<<<<<< HEAD
 const allowedOrigins = [
   "http://localhost:5176",
   "https://server-backend.azurewebsites.net",
@@ -48,7 +47,6 @@ mongoose
     socketTimeoutMS: 45000,
   })
   .then(() => console.log("MongoDB connected"))
-=======
 const allowedOrigins = ["http://localhost:5174", "https://api-mirana.azurewebsites.net"];
 app.use(
   cors({
@@ -119,7 +117,6 @@ app.listen(PORT, "0.0.0.0", () => {
 mongoose
   .connect(process.env.MONGODB_AC, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB Connected"))
->>>>>>> 6d4ded02184426c5922f53eea13db6334ee77134
   .catch((error) => {
     console.error("MongoDB Connection Error:", error.message);
     process.exit(1);
