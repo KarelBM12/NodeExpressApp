@@ -47,7 +47,7 @@ mongoose
     socketTimeoutMS: 45000,
   })
   .then(() => console.log("MongoDB connected"))
-const allowedOrigins = ["http://localhost:5174", "https://api-mirana.azurewebsites.net"];
+  
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -121,7 +121,7 @@ mongoose
     console.error("MongoDB Connection Error:", error.message);
     process.exit(1);
   });
-<<<<<<< HEAD
+
 
 app.get("/api/formdata", async (req, res) => {
   try {
@@ -162,5 +162,5 @@ const server = http.createServer(app);
 server.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`); // Fixed syntax error
 });
-=======
->>>>>>> 6d4ded02184426c5922f53eea13db6334ee77134
+
+
