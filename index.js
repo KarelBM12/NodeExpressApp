@@ -14,6 +14,7 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5176",
   "https://api-mirana.azurewebsites.net",
+  "https://jolly-rock-0d59e9600.4.azurestaticapps.net"
 ];
 
 app.use(
